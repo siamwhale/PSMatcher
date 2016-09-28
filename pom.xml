@@ -10,4 +10,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <description>PSMatcher on MaxDB in-memory database
+https://github.com/jankotek/mapdb-site/tree/gh-pages/src/test/java/doc</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+    </dependencies>
 </project>
