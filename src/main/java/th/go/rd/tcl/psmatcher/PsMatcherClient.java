@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+java -cp "PSMatcher-0.0.1.jar;lib/*" th.go.rd.tcl.psmatcher.PsMatcherClient
  */
 package th.go.rd.tcl.psmatcher;
 
@@ -15,9 +13,16 @@ import java.rmi.registry.Registry;
 public class PsMatcherClient {
     public static void main(String args[]) throws Exception {
         Registry registry = LocateRegistry.getRegistry("localhost");
-        PsMatcherInf  obj = (PsMatcherInf ) registry.lookup("PSMatcherServer");
+        PsMatcherInf  obj = (PsMatcherInf ) registry.lookup("PsMatcherServer");
         String nid = "0100472000151";
+        String branch = "00001";
+                
         System.out.println("LTO "+ nid +" : "+ obj.getLTO(nid)); 
+        nid = "0000000000000";
+        System.out.println("NONLTO "+ nid +" : "+ obj.getLTO(nid)); 
+        
+        nid = "0103504005865";
+        System.out.println("LTO "+ nid +" : "+ obj.getTeam(nid, branch)); 
         nid = "0000000000000";
         System.out.println("NONLTO "+ nid +" : "+ obj.getLTO(nid)); 
         

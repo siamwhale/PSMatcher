@@ -9,5 +9,6 @@ import java.rmi.RemoteException;
  */
 public interface PsMatcherInf extends Remote {
     public boolean getLTO(String nid) throws RemoteException;
-    public String getFVAT(String nidbranch) throws RemoteException;
+    public String getFVAT(String nid, String branch) throws RemoteException;
+    public String getTeam(String nid, String branch) throws RemoteException;
 }

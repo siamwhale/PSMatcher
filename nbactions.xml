@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath th.go.rd.tcl.importservice.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
+                <exec.args>-classpath %classpath th.go.rd.tcl.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -24,7 +24,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath th.go.rd.tcl.importservice.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
+                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath th.go.rd.tcl.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -39,8 +39,27 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath th.go.rd.tcl.importservice.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
+                <exec.args>-classpath %classpath th.go.rd.tcl.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
+        </action>
+        <action>
+            <actionName>build</actionName>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
         </action>
     </actions>

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+java -cp "PSMatcher-0.0.1.jar;lib/*" th.go.rd.tcl.psmatcher.PsMatcherServer jdbc:db2://10.20.37.12:60000/TAXSERV dasusr1 EdUaTezza53yMy55 2559
  */
 package th.go.rd.tcl.psmatcher;
 
@@ -16,6 +14,8 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class PsMatcherServer implements PsMatcherInf {
     static PsLTOindex ltoidx = null;
+    static PsTeamindex teamidx = null;
+    static PsVatindex vatidx = null;
     public PsMatcherServer() throws RemoteException {	
     }
 
@@ -23,14 +23,19 @@ public class PsMatcherServer implements PsMatcherInf {
     public boolean getLTO(String nid) throws RemoteException {
         return ltoidx.getPsLTO(nid);
     }
-
+    
     @Override
-    public String getFVAT(String nidbranch) throws RemoteException {
-        return "1";
+    public String getFVAT(String nid,String branch) throws RemoteException {
+        return vatidx.getFVAT(nid, branch);
+    }
+    
+    @Override
+    public String getTeam(String nid, String branch) throws RemoteException {
+        return teamidx.getPsTeam(nid, branch);
     }
     
     public static void main(String args[]) throws Exception {
-        System.out.println("PsMatcherServer started");
+        System.out.println("PsMatcherServer starting");
         
 
         //Instantiate RmiServer
@@ -42,10 +47,10 @@ public class PsMatcherServer implements PsMatcherInf {
             Registry reg;
             try {
             	reg = LocateRegistry.createRegistry(1099);
-                System.out.println("java RMI registry created.");
+                System.out.println("PsMatcherServer RMI registry created.");
 
             } catch(Exception e) {
-            	System.out.println("Using existing registry");
+            	System.out.println("PsMatcherServer using existing registry");
             	reg = LocateRegistry.getRegistry();
             }
             
@@ -53,6 +58,13 @@ public class PsMatcherServer implements PsMatcherInf {
             ltoidx = new PsLTOindex(args[0], args[1], args[2]);
             ltoidx.preparePsLTO(args[3]);
             
+            vatidx = new PsVatindex(args[0], args[1], args[2]);
+            vatidx.preparePsVat();
+            
+            teamidx = new PsTeamindex(args[0], args[1], args[2]);
+            teamidx.preparePsTeam();
+            
+            System.out.println("PsMatcherServer started...already to service");
 
         } catch (RemoteException e) {
         	e.printStackTrace();

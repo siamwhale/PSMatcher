@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
@@ -20,6 +23,7 @@ import org.mapdb.Serializer;
  * @author siamwhale
  */
 public class PsLTOindex {
+    private Date date;
     private DB db = null;
     private HTreeMap<String, Boolean> ltomap;
     
@@ -50,8 +54,11 @@ public class PsLTOindex {
         try {
             Class.forName("com.ibm.db2.jcc.DB2Driver");
             connection = DriverManager.getConnection(url,dbuser,dbpass);
-            if (connection!=null) System.out.println("PsLTOindex DB2 Connected...");
+            this.date = new java.util.Date();
+            if (connection!=null) System.out.println(new Timestamp(date.getTime()) + " PsLTOindex DB2 Connected...");
             getPSLTOStm = connection.prepareStatement(sql);
+            this.date = new java.util.Date();
+            System.out.println(new Timestamp(date.getTime()) + " PsLTOindex create index..");
             getPSLTOStm.setString(1, fiscalyear);
             rslto = getPSLTOStm.executeQuery();
             while (rslto.next()) {
@@ -67,8 +74,8 @@ public class PsLTOindex {
                 if (rslto != null) rslto.close();
                 if (getPSLTOStm != null) getPSLTOStm.close();
                 connection.close();
-                System.out.println("PsLTOindex Loaded..."+ cntrow + " records");
-                System.out.println("PsLTOindex DB2 Disonnected...");
+                System.out.println(new Timestamp(date.getTime()) + " PsLTOindex Loaded..."+ cntrow + " records");
+                System.out.println(new Timestamp(date.getTime()) + " PsLTOindex DB2 Disonnected...");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -76,7 +83,9 @@ public class PsLTOindex {
     }
     
     public boolean getPsLTO(String nid) {
+        this.date = new java.util.Date();
         Object res = ltomap.get(nid);
+        System.out.println(new Timestamp(date.getTime()) + " PsLTOindex checked nid "+nid);
         if (res != null) return true;
         else return false;
     }
