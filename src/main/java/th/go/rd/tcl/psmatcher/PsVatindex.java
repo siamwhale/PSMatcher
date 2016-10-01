@@ -17,6 +17,7 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 import org.mapdb.serializer.SerializerArrayTuple;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -86,6 +87,8 @@ public class PsVatindex {
     public String getFVAT(String nid,String branch) {
         this.date = new java.util.Date();
         System.out.println(new Timestamp(date.getTime()) + " PsVatindex checked nid "+ nid +" branch "+ branch);
-        return vatmap.get(new Object[]{nid,branch});
+        String res = vatmap.get(new Object[]{nid,branch});
+        if (StringUtils.isEmpty(res)) return "";
+        else return res;
     }
 }

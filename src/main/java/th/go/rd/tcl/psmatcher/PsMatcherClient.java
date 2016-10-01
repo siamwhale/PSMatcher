@@ -14,17 +14,14 @@ public class PsMatcherClient {
     public static void main(String args[]) throws Exception {
         Registry registry = LocateRegistry.getRegistry("localhost");
         PsMatcherInf  obj = (PsMatcherInf ) registry.lookup("PsMatcherServer");
-        String nid = "0100472000151";
-        String branch = "00001";
+        String nid = args[0];
+        String branch = args[1];
                 
-        System.out.println("LTO "+ nid +" : "+ obj.getLTO(nid)); 
-        nid = "0000000000000";
-        System.out.println("NONLTO "+ nid +" : "+ obj.getLTO(nid)); 
-        
-        nid = "0103504005865";
-        System.out.println("LTO "+ nid +" : "+ obj.getTeam(nid, branch)); 
-        nid = "0000000000000";
-        System.out.println("NONLTO "+ nid +" : "+ obj.getLTO(nid)); 
-        
+        System.out.println("Check found LTO "+ nid +" : "+ obj.getLTO(nid)); 
+        System.out.println("Check not found LTO "+ nid +" : "+ obj.getLTO(nid)); 
+        System.out.println("Check found team  "+ nid + " branch " + branch +" : "+ obj.getTeam(nid, branch)); 
+        System.out.println("Check not found team  "+ nid + " branch " + branch +" : "+ obj.getTeam(nid, branch)); 
+        System.out.println("Check found fvat  "+ nid + " branch " + branch +" : "+ obj.getFVAT(nid, branch)); 
+        System.out.println("Check not found fvat  "+ nid + " branch " + branch +" : "+ obj.getFVAT(nid, branch)); 
     }
 }

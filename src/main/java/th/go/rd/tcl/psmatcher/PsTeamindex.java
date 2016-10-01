@@ -12,13 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
 import org.mapdb.BTreeMap;
 
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 import org.mapdb.serializer.SerializerArrayTuple;
+import org.apache.commons.lang3.StringUtils;
 /**
  *
  * @author SGH042T3X7
@@ -91,6 +91,8 @@ public class PsTeamindex {
     public String getPsTeam(String nid,String branch) {
         this.date = new java.util.Date();
         System.out.println(new Timestamp(date.getTime()) + " PsTeamindex checked nid "+ nid +" branch "+ branch);
-        return teammap.get(new Object[]{nid,branch});
+        String res = teammap.get(new Object[]{nid,branch});
+        if (StringUtils.isEmpty(res)) return "";
+        return res;
     }
 }
