@@ -16,6 +16,7 @@ public class PsMatcherServer implements PsMatcherInf {
     static PsLTOindex ltoidx = null;
     static PsTeamindex teamidx = null;
     static PsVatindex vatidx = null;
+    
     public PsMatcherServer() throws RemoteException {	
     }
 
@@ -58,16 +59,18 @@ public class PsMatcherServer implements PsMatcherInf {
             ltoidx = new PsLTOindex(args[0], args[1], args[2]);
             ltoidx.preparePsLTO(args[3]);
             
-            vatidx = new PsVatindex(args[0], args[1], args[2]);
-            vatidx.preparePsVat();
+            //vatidx = new PsVatindex(args[0], args[1], args[2]);
+            //vatidx.preparePsVat();
             
-            teamidx = new PsTeamindex(args[0], args[1], args[2]);
-            teamidx.preparePsTeam();
+            //teamidx = new PsTeamindex(args[0], args[1], args[2]);
+            //teamidx.preparePsTeam();
             
             System.out.println("PsMatcherServer started...already to service");
-
+            
+            
+            
         } catch (RemoteException e) {
         	e.printStackTrace();
-        }
+        } 
     }
 }

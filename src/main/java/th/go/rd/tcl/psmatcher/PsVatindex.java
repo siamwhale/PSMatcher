@@ -88,7 +88,7 @@ public class PsVatindex {
         this.date = new java.util.Date();
         System.out.println(new Timestamp(date.getTime()) + " PsVatindex checked nid "+ nid +" branch "+ branch);
         String res = vatmap.get(new Object[]{nid,branch});
-        if (StringUtils.isEmpty(res)) return "";
+        if (StringUtils.isEmpty(res)) return "false";
         else return res;
     }
 }
