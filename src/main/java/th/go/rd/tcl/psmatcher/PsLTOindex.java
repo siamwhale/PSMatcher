@@ -85,9 +85,13 @@ public class PsLTOindex {
     public boolean getPsLTO(String nid) {
         this.date = new java.util.Date();
         Object res = ltomap.get(nid);
-        System.out.println(new Timestamp(date.getTime()) + " PsLTOindex checked nid "+nid);
-        if (res != null) return true;
-        else return false;
+        if (res != null) {
+            System.out.println(new Timestamp(date.getTime()) + " PsLTOindex checked nid "+nid+" = 1");
+            return true;
+        }else{
+            System.out.println(new Timestamp(date.getTime()) + " PsLTOindex checked nid "+nid+" = 0");
+            return false;
+        }
     }
             
     

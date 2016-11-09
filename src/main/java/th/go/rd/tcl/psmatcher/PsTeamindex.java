@@ -90,9 +90,13 @@ public class PsTeamindex {
     
     public String getPsTeam(String nid,String branch) {
         this.date = new java.util.Date();
-        System.out.println(new Timestamp(date.getTime()) + " PsTeamindex checked nid "+ nid +" branch "+ branch);
         String res = teammap.get(new Object[]{nid,branch});
-        if (StringUtils.isEmpty(res)) return "";
-        return res;
+        if (StringUtils.isEmpty(res)) { 
+            System.out.println(new Timestamp(date.getTime()) + " PsTeamindex checked nid "+ nid +" branch "+ branch + " = 0");
+            return ""; 
+        } else { 
+            System.out.println(new Timestamp(date.getTime()) + " PsTeamindex checked nid "+ nid +" branch "+ branch + " = 1");
+            return res;
+        }
     }
 }
